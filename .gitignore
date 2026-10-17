@@ -1,0 +1,40 @@
+# ---- Node / Frontend (apps/web) ----
+node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vite/
+
+# ---- .NET / Backend (apps/src) ----
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# ---- Editor ----
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- Env ----
+.env
+.env.local
+
+# ---- Docker ----
+.docker/
+
+# ---- Claude Code (kişisel izinler) ----
+.claude/settings.local.json
+
+# ---- Local-only docs (test şifreleri, sunucu/alan adı notları vb. içerir, commit edilmez) ----
+docs/LOCAL_*.md
+LOCAL_*.md
