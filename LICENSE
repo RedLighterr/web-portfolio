@@ -1,21 +1,109 @@
-MIT License
+Web Portfolio License 1.0
 
 Copyright (c) 2026 Muhammed Furkan Yüce
+Original repository: https://github.com/RedLighterr/web-portfolio
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+0. Summary (not legally binding; the sections below govern)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+   - You may use, copy, study and modify the Software free of charge.
+   - Unmodified copies: non-commercial use only, with visible credit.
+   - Modified works: you may sell them and license your own changes
+     under any terms you choose, as long as you keep the copyright notice.
+   - Personal content (name, logo, CV, posts, images) is NOT covered by
+     this license; see LICENSE-CONTENT.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. Definitions
+
+   "Licensor" means Muhammed Furkan Yüce.
+
+   "Software" means the source code, configuration files, build scripts and
+   other program code in this repository, excluding Content.
+
+   "Content" means the Licensor's personal and creative material, whether
+   stored in this repository or served by the website: the Licensor's name
+   and likeness, logos and brand marks, CV and biography texts, blog posts,
+   project descriptions, images, photographs, videos and other media. Content
+   is licensed separately in LICENSE-CONTENT.
+
+   "Trivial Change" means any of the following, alone or in combination:
+   reformatting; renaming identifiers or files; editing, adding or removing
+   comments; translating text; changing configuration values, environment
+   settings, colors, fonts, design tokens or other styling values; replacing
+   text, images or other content; removing parts of the Software; or
+   combining the Software with other works without changing the Software's
+   own code.
+
+   "Unmodified Copy" means the Software, or any part of it, as published by
+   the Licensor, or with only Trivial Changes.
+
+   "Modified Work" means a work based on the Software in which the
+   Software's code has been changed beyond Trivial Changes, so that
+   functionality is added, removed or materially altered.
+
+   "Commercial Use" means selling, renting or licensing for a fee; offering
+   as a paid product or paid service (including hosting or software as a
+   service); or including in any product or service that is sold or offered
+   for a fee.
+
+2. Grant of rights
+
+   Subject to the conditions of this license, the Licensor grants you a
+   worldwide, royalty-free, non-exclusive permission to use, copy, study,
+   run and modify the Software.
+
+3. Unmodified Copies
+
+   You may use and redistribute Unmodified Copies only for purposes other
+   than Commercial Use, and only if you:
+
+   a) keep this license and the copyright notice above in every copy; and
+   b) give visible credit to the Licensor, including the Licensor's name and
+      a link to the original repository, in a place where users of the
+      Software can reasonably see it (for example, the site footer or an
+      "about" page) and in the README of any redistributed source.
+
+   Commercial Use of Unmodified Copies is not permitted.
+
+4. Modified Works
+
+   You may use, copy, distribute, sublicense and sell a Modified Work,
+   including for Commercial Use. You may license your own changes under
+   any terms you choose. In every distributed copy of the source code of a
+   Modified Work you must keep the copyright notice above together with the
+   statement:
+
+       "Based on web-portfolio by Muhammed Furkan Yüce
+        (https://github.com/RedLighterr/web-portfolio)."
+
+   Visible credit in the user interface of a Modified Work is welcome but
+   not required.
+
+5. Content and trademarks
+
+   This license grants no rights to Content, or to the Licensor's name,
+   logos or brand marks. A Modified Work or Unmodified Copy must not present
+   itself as the Licensor's website or as endorsed by the Licensor.
+
+6. Contributions
+
+   Unless stated otherwise, any contribution you intentionally submit to
+   the original repository (for example, through a pull request) is provided
+   under the terms of this license, and you grant the Licensor the right to
+   use, modify and relicense it as part of the Software.
+
+7. Termination
+
+   If you breach this license, your rights under it end automatically.
+   If you stop the breach within 30 days of becoming aware of it, your
+   rights are restored, unless the Licensor has notified you in writing
+   that they are terminated.
+
+8. No warranty; limitation of liability
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+   NO EVENT SHALL THE LICENSOR OR CONTRIBUTORS BE LIABLE FOR ANY CLAIM,
+   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+   OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+   USE OR OTHER DEALINGS IN THE SOFTWARE.
