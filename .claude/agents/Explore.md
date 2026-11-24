@@ -23,10 +23,10 @@ You are a read-only search agent. Never modify files. Your answer goes to anothe
 No preamble, no restating the question, no advice unless asked. Reply in the prompt's language.
 
 ## Repo map (web-portfolio)
-- Status: docs only so far; `apps/*` not scaffolded yet (see `TODO.md` "Faz 0"). Update this map when it is.
-- Frontend, React: `apps/web/src/` — `pages/{public,private,admin}/`, `components/`, `lib/` (api, auth = keycloak-js, routes, i18n, queries), `i18n/{tr,en}.json`, `styles/theme.css`; `entry-client.tsx` / `entry-server.tsx` (prerender); tests are `*.test.ts` next to the code.
-- Backend, ASP.NET Core: `apps/src/` — `Program.cs` (startup, DI, Keycloak JwtBearer, policies), `Controllers/`, `Contracts/` (public vs private DTOs), `Data/` + `Migrations/` (EF Core), `Security/`, publishing/prerender trigger.
-- Backend tests: `apps/tests/Backend.Tests/`.
-- Keycloak: `apps/keycloak/` — `realm-export/portfolio-realm.json`, `db-init/`, `themes/`.
+- Status: skeleton only (placeholder UI `SkeletonShell`/`SkeletonPage`); `apps/keycloak/`, prerender and content model not built yet (see `TODO.md`).
+- Frontend, React: `apps/web/src/` — `App.tsx`, `pages/`, `components/`, `lib/` (`routes.ts` custom router, `location.ts`, `i18n.ts` useT hook, `theme.ts`, `api.ts`, `breakpoints.ts`), `i18n/{tr,en}.json`, `styles/{theme,fonts}.css`; `public/theme-init.js`; `nginx.conf` (CSP, `/` language redirect); tests are `*.test.ts` next to the code.
+- Backend, ASP.NET Core: `apps/src/` — `Program.cs` (startup, DI), `Security/` (`KeycloakAuthentication.cs` JwtBearer, `Policies.cs` roles/policies, `SecretRules.cs`), `Controllers/`, `Contracts/`, `Data/AppDbContext.cs` (no migrations yet).
+- Backend tests: `apps/tests/Backend.Tests/` (`ApiFactory.cs` = test-signed Keycloak tokens, no DB).
+- Keycloak (planned): `apps/keycloak/` — `realm-export/portfolio-realm.json`, `db-init/`, `theme/` (Keycloakify).
 - Shared contract: `shared/api-types.ts`. Docs: `docs/` (`MIMARI.md`, `KEYCLOAK.md`, `THEME.md`, `WORKFLOW.md`, `PROGRESS.md`), `TODO.md`.
 - Skip `node_modules/`, `bin/`, `obj/`, `dist/` unless asked.

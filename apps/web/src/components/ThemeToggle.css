@@ -1,0 +1,38 @@
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: var(--radius-full);
+  border: var(--border-width-thin) solid var(--border-default);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+@media (pointer: coarse) {
+  .theme-toggle {
+    width: var(--tap-min);
+    height: var(--tap-min);
+  }
+}
+
+/* Hover durumları yalnızca fareli cihazda: dokunmatikte dokunuştan sonra "takılı kalan" hover olmasın. */
+@media (hover: hover) {
+  .theme-toggle:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary-subtle-border);
+    background: var(--color-primary-subtle);
+  }
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}

@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    # Prod'da DB portu dışarı açılmaz — yalnızca compose ağındaki servisler erişir.
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-portfolio}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env for production}
+      - POSTGRES_DB=${POSTGRES_DB:-portfolio}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-portfolio} -d ${POSTGRES_DB:-portfolio}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    image: web-portfolio-backend:prod
+    restart: unless-stopped
+    build:
+      context: ./apps/src
+      dockerfile: Dockerfile
+    # Port yayınlanmaz: API yalnızca frontend'in nginx proxy'si (/api/) üzerinden erişilir.
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__Default=Host=db;Port=5432;Database=${POSTGRES_DB:-portfolio};Username=${POSTGRES_USER:-portfolio};Password=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env for production}
+      # Issuer = sitenin public adresi + /auth (nginx Keycloak'ı aynı origin'den sunar); discovery iç ağdan, http.
+      - Keycloak__Authority=${PUBLIC_URL:?PUBLIC_URL must be set in .env for production}/auth/realms/portfolio
+      - Keycloak__MetadataAddress=http://keycloak:8080/auth/realms/portfolio/.well-known/openid-configuration
+      - Keycloak__RequireHttpsMetadata=false
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: web-portfolio-frontend:prod
+    restart: unless-stopped
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  db-data:

@@ -1,0 +1,34 @@
+/* Fontlar projeye gömülü (Fontsource paketleri, npm). Build'de woff2 dosyaları /assets/ altına kopyalanır →
+   Google Fonts'a istek yok, CSP `font-src 'self'` yeterli (apps/web/nginx.conf).
+
+   GEÇİCİ SET: SDK-Infrastructure-Dashboard ile aynı. Kişisel set tasarım aşamasında seçilecek (TODO.md "Açık kararlar").
+
+   Yalnızca latin + latin-ext alt kümeleri alınır (Türkçe ğ/ş/ı/İ latin-ext'te). Ağırlık listesi kullanılanlarla
+   aynı; yeni bir ağırlık kullanılacaksa buraya iki satır eklenir.
+
+   Font değiştirmek (bkz. docs/THEME.md "Fontlar"):
+     1. npm install @fontsource/<yeni-font>
+     2. Aşağıdaki ilgili import'ları yeni paketle değiştir
+     3. theme.css'te --font-heading / --font-body / --font-mono içindeki aile adını güncelle
+     4. npm uninstall @fontsource/<eski-font> */
+/* --font-heading: Space Grotesk 500/600/700 */
+@import '@fontsource/space-grotesk/latin-500.css';
+@import '@fontsource/space-grotesk/latin-ext-500.css';
+@import '@fontsource/space-grotesk/latin-600.css';
+@import '@fontsource/space-grotesk/latin-ext-600.css';
+@import '@fontsource/space-grotesk/latin-700.css';
+@import '@fontsource/space-grotesk/latin-ext-700.css';
+
+/* --font-body: Inter 400/500/600 */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-ext-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-ext-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-ext-600.css';
+
+/* --font-mono: JetBrains Mono 400/500 */
+@import '@fontsource/jetbrains-mono/latin-400.css';
+@import '@fontsource/jetbrains-mono/latin-ext-400.css';
+@import '@fontsource/jetbrains-mono/latin-500.css';
+@import '@fontsource/jetbrains-mono/latin-ext-500.css';

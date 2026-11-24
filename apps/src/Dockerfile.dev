@@ -1,0 +1,16 @@
+# Development image with hot reload (dotnet watch)
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+WORKDIR /app
+
+COPY Backend.csproj ./
+RUN dotnet restore Backend.csproj
+
+COPY . .
+
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Development
+# Bind mounts on Windows don't emit native filesystem events reliably; polling keeps dotnet watch responsive.
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 8080
+
+ENTRYPOINT ["dotnet", "watch", "run", "--no-launch-profile", "--urls", "http://+:8080"]

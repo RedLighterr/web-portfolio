@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# Local-only docs (test şifreleri vb.) — savunma amaçlı
+LOCAL_*.md

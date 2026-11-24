@@ -1,0 +1,7 @@
+# Satır sonları repoda LF. Shell betikleri (ör. Keycloak db-init) container'da CRLF ile bozulur.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

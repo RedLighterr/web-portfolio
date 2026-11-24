@@ -39,33 +39,21 @@ Karar verilince yukarıya tarihle taşı.
 
 ## Faz 0 — İskelet (referanstan uyarlanır, tasarım gerektirmez)
 
-### Frontend iskeleti (`apps/web`)
-- [ ] Vite + React 19 + TS projesi; `package.json` script'leri, `tsconfig.*`, `.oxlintrc.json`, `vite.config.ts` referanstaki gibi
-- [ ] `src/styles/theme.css` — referans yapısı, turuncu/amber geçici rampa, warning/danger ayrıştırması ([THEME.md](docs/THEME.md))
-- [ ] `src/styles/fonts.css` + Fontsource (geçici: referans set; kesin set tasarımda)
-- [ ] `index.css`, `ThemeToggle`, `Logo` (geçici logo), `breakpoints.ts`, `public/theme-init.js`
-- [ ] Testler: `themeAudit`, `breakpoints`, `touchCss` (referanstan), i18n anahtar denetimi, tema `localStorage` anahtarı tutarlılığı
-- [ ] Özel router (`lib/routes.ts`: `matchRoute` / `pathFor`, dil öneki + slug) + testleri
-- [ ] i18n altyapısı (`lib/i18n.ts`, `useT()`, tip güvenli anahtarlar) + `i18n/{tr,en}.json` iskeleti
-- [ ] `Dockerfile`, `Dockerfile.dev`, `nginx.conf` (CSP + Turnstile, `/api/`, `/auth/`, `/media/`, `/demos/` ayrı CSP + CORS, `/private-demos/` `auth_request`, prerender `try_files`, `/` dil yönlendirmesi `map`, `/auth/admin` kapalı), `.dockerignore`
+Frontend ve backend iskeleti tamamlandı (2026-10-17, bkz. [docs/PROGRESS.md](docs/PROGRESS.md)). Kalanlar:
 
-### Backend iskeleti (`apps/src`, `apps/tests`)
-- [ ] ASP.NET Core .NET 9 Web API, `global.json`, `Backend.csproj`, `.sln` (referanstaki gibi)
-- [ ] `/api/health`, EF Core + Npgsql, ilk migration (boş şema)
-- [ ] Keycloak JwtBearer doğrulaması + `Admin` / `PrivateViewer` / `ProjectAccess` politikaları, varsayılan politika "kimlik doğrulanmış" ([KEYCLOAK.md §4](docs/KEYCLOAK.md))
-- [ ] `SecretRules` (prod sırları zorunlu), `Dockerfile`, `Dockerfile.dev`
-- [ ] `Backend.Tests` (xUnit), test imzalı token ile yetki testleri
-
-### Keycloak (`apps/keycloak`)
-- [ ] `Dockerfile`, `realm-export/portfolio-realm.json` (realm, roller, `portfolio-web`, `portfolio-admin-cli` salt okunur servis hesabı, audience + `roles` mapper'ları, brute force, admin OTP, TR + EN locale), `db-init/01-keycloak-db.sh`
-- [ ] Frontend `lib/auth.ts` (`keycloak-js`, lazy), `public/silent-check-sso.html`, CSP ile doğrulama
+### Keycloak (`apps/keycloak`) — sıradaki adım
+- [ ] `Dockerfile`, `realm-export/portfolio-realm.json` (realm, roller, `portfolio-web`, `portfolio-admin-cli` salt okunur servis hesabı, audience + `roles` mapper'ları, brute force, admin OTP, TR + EN locale), `db-init/01-keycloak-db.sh` (Postgres'te `keycloak` veritabanı)
+- [ ] Compose'a Keycloak servisi (dev `:8081`, `start-dev --import-realm`; prod port yok) + `.env.example`'a Keycloak sırları (`KEYCLOAK_DB_PASSWORD`, `KC_BOOTSTRAP_ADMIN_PASSWORD`) + `SecretRules`'a eklenmesi
+- [ ] nginx: `/auth/` proxy'si, `/auth/admin/` ve `/auth/realms/master/` kapalı (upstream compose'da olmadan nginx açılmaz — servisle birlikte eklenir)
+- [ ] Frontend `lib/auth.ts` (`keycloak-js`, lazy), `public/silent-check-sso.html`, `api.ts`'e token ekleme, CSP ile doğrulama
+- [ ] Gerçek Keycloak'a karşı uçtan uca deneme: token → `/api/me` (rol claim'i, audience, iç ağdan discovery — `KC_HOSTNAME_BACKCHANNEL_DYNAMIC`)
 - [ ] Keycloakify iskeleti (`apps/keycloak/theme/`), theme.css/fonts.css senkron betiği + CI `--check`, multi-stage build (Node + Maven) → `providers/`
 
-### Altyapı
-- [ ] `docker-compose.dev.yml` / `docker-compose.yml` (db, backend, frontend, keycloak; prod'da prerender servisi + volume'lar)
-- [ ] `.env.example` (üretme komutlarıyla), `shared/api-types.ts` + `shared/sync-types.mjs`
-- [ ] `.github/workflows/ci.yml` (frontend: lint/test/build/sync-check; backend: build/test) — branch'ler `main`, `development`
-- [ ] `.claude/agents/Explore.md` Repo map'ini gerçek klasörlere göre güncelle
+### Sonraki fazlara bağlı altyapı
+- [ ] nginx: `/media/`, `/demos/` (ayrı CSP + CORS), `/private-demos/` (`auth_request`), prerender `try_files` — ilgili özelliklerle (Faz 2–3)
+- [ ] Prerender servisi + `site-prerender` volume (compose), SSR entry'leri (Faz 2)
+- [ ] EF Core ilk migration + açılışta `Database.Migrate()` — ilk entity ile (Faz 3); `dotnet-ef` yerel araç manifesti (`.config/dotnet-tools.json`)
+- [ ] `ProjectAccess` politikası — `project_access` tablosuyla (Faz 3)
 
 ## Faz 1 — Tasarım (Artifact onayı)
 

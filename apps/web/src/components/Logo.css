@@ -1,0 +1,11 @@
+.logo {
+  /* Square monogram, shown whole at its own aspect ratio. */
+  --logo-h: 40px;
+  display: inline-block;
+  width: var(--logo-h);
+  height: var(--logo-h);
+  background-image: var(--logo-src);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}

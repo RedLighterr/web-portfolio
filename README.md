@@ -2,7 +2,7 @@
 
 Kişisel portfolyo sitesi: herkese açık vitrin (hakkımda/CV, projeler, blog, iletişim) + Keycloak ile korunan özel alan ve admin paneli. TR + EN.
 
-> Proje şu anda doküman aşamasında; kod iskeleti henüz yok (bkz. [TODO.md](TODO.md)).
+> Proje iskelet aşamasında: arayüz geçici, Keycloak servisi henüz eklenmedi (bkz. [TODO.md](TODO.md)).
 
 Monorepo yapısı:
 
@@ -29,8 +29,10 @@ docker compose -f docker-compose.dev.yml up
 |---|---|
 | Frontend (Vite, hot reload) | http://localhost:5173 |
 | Backend API | http://localhost:5247 |
-| Keycloak | http://localhost:8081/auth |
+| Keycloak (henüz yok) | http://localhost:8081/auth |
 | Postgres | localhost:5432 |
+
+Docker olmadan: `cd apps/web && npm install && npm run dev` (frontend, `/api/` → `localhost:5247`) ve `cd apps/src && dotnet run` (.NET 9 SDK; `global.json` 9.0.318'e sabitler).
 
 Production build (nginx, `http://localhost:8080`; `.env`'de sırlar zorunlu):
 

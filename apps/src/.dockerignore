@@ -1,0 +1,8 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Local-only docs (test şifreleri vb.) — savunma amaçlı
+LOCAL_*.md

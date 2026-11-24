@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres:17-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-portfolio}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-portfolio}
+      - POSTGRES_DB=${POSTGRES_DB:-portfolio}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-portfolio} -d ${POSTGRES_DB:-portfolio}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    image: web-portfolio-backend:dev
+    build:
+      context: ./apps/src
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5247:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Default=Host=db;Port=5432;Database=${POSTGRES_DB:-portfolio};Username=${POSTGRES_USER:-portfolio};Password=${POSTGRES_PASSWORD:-portfolio}
+      # Token'daki issuer tarayıcının gördüğü adres; discovery/JWKS iç ağdan (docs/KEYCLOAK.md §4).
+      # Keycloak servisi sonraki adımda eklenecek (TODO.md Faz 0); o zamana kadar yalnızca giriş isteyen uçlar çalışmaz.
+      - Keycloak__Authority=http://localhost:8081/auth/realms/portfolio
+      - Keycloak__MetadataAddress=http://keycloak:8080/auth/realms/portfolio/.well-known/openid-configuration
+      - Keycloak__RequireHttpsMetadata=false
+    volumes:
+      - ./apps/src:/app
+      - backend-bin:/app/bin
+      - backend-obj:/app/obj
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: web-portfolio-frontend:dev
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      # Vite /api/ isteklerini backend'e proxy'ler (vite.config.ts) — tarayıcı için tek origin, CORS yok.
+      - VITE_API_PROXY_TARGET=http://backend:8080
+    volumes:
+      - ./apps/web:/app
+      - frontend-node-modules:/app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  db-data:
+  backend-bin:
+  backend-obj:
+  frontend-node-modules:

@@ -42,9 +42,13 @@ shared/       Frontend ve backend arasında paylaşılan kaynaklar (DTO/tip tan�
 docs/         Ek dokümantasyon (mimari, Keycloak, tema kuralları, workflow, ilerleme)
 ```
 
-> **Durum (2026-10-17):** yalnızca dokümanlar var; `apps/*` iskeleti henüz oluşturulmadı (bkz. [TODO.md](TODO.md) "Faz 0").
+> **Durum (2026-10-17):** frontend ve backend iskeleti kurulu (`apps/web`, `apps/src`, `apps/tests`, compose, CI). Arayüz yalnızca **geçici teknik kabuk** (`SkeletonShell`/`SkeletonPage`) — tasarım onaylanınca değişecek. Henüz yok: `apps/keycloak/` ve compose'daki Keycloak servisi, prerender servisi (bkz. [TODO.md](TODO.md) "Faz 0").
 
-Portlar (dev): frontend `:5173`, backend `:5247`, Keycloak `:8081`, Postgres `:5432`. Prod'da dışarıya yalnızca nginx açılır (`:8080`); `/api/` → backend, `/auth/` → Keycloak aynı origin'den proxy'lenir.
+Portlar (dev): frontend `:5173`, backend `:5247`, Keycloak `:8081` (henüz yok), Postgres `:5432`. Prod'da dışarıya yalnızca nginx açılır (`:8080`); `/api/` → backend, `/auth/` → Keycloak aynı origin'den proxy'lenir. Dev'de de tarayıcı için tek origin: Vite `/api/`'yi backend'e proxy'ler (`vite.config.ts`), backend'de CORS yok.
+
+Backend .NET 9 SDK ister; sistemde yoksa `apps/src/global.json` kullanıcı-yerel SDK'ya (9.0.318, `%LOCALAPPDATA%\Microsoft\dotnet`) pinler. Yerelde: `"$LOCALAPPDATA/Microsoft/dotnet/dotnet.exe" test apps/tests/Backend.Tests` (sistemdeki `dotnet` .NET 10).
+
+> **Port çakışması:** SDK-Infrastructure-Dashboard'ın dev ortamı da `5173`/`5247`/`5432` kullanır. İkisi aynı anda çalışmaz; birini durdur (`docker compose -f docker-compose.dev.yml down` o projede) — çalışan diğer projeyi kullanıcıya sormadan durdurma.
 
 ## Komutlar (kullanıcı sözlü isteği → aksiyon)
 
@@ -52,7 +56,7 @@ Kullanıcı **"çalıştır" / "test et"** dediğinde:
 ```bash
 docker compose -f docker-compose.dev.yml up
 ```
-Hot-reload aktif çalışır: backend `:5247`, frontend `:5173`, Keycloak `:8081` (volume mount + `CHOKIDAR_USEPOLLING`, `Dockerfile.dev`).
+Hot-reload aktif çalışır: backend `:5247`, frontend `:5173` (volume mount + `CHOKIDAR_USEPOLLING`, `Dockerfile.dev`). Keycloak `:8081` sonraki adımda eklenecek.
 
 Kullanıcı **"build al"** dediğinde:
 ```bash

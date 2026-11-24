@@ -1,6 +1,6 @@
 # Workflow
 
-> **Durum (2026-10-17):** compose dosyaları ve `apps/*` henüz yok; aşağıdaki komutlar Faz 0 iskeleti kurulunca geçerli olur (bkz. [../TODO.md](../TODO.md)).
+> **Durum (2026-10-17):** iskelet kurulu; Keycloak ve prerender servisleri henüz compose'da yok (bkz. [../TODO.md](../TODO.md) Faz 0 "Kalanlar"). SDK-Infrastructure-Dashboard'ın dev ortamı aynı portları kullanır — ikisi aynı anda çalışmaz.
 
 ## Çalıştırma (test / hot-reload)
 
@@ -10,7 +10,7 @@ Kullanıcı **"çalıştır"** veya **"test et"** dediğinde:
 docker compose -f docker-compose.dev.yml up
 ```
 
-- Frontend: `http://localhost:5173` (`Dockerfile.dev`, volume mount `./apps/web:/app`, `CHOKIDAR_USEPOLLING=true`)
+- Frontend: `http://localhost:5173` (`Dockerfile.dev`, volume mount `./apps/web:/app`, `CHOKIDAR_USEPOLLING=true`; `/api/` Vite proxy'siyle backend'e)
 - Backend: `http://localhost:5247` (`Dockerfile.dev`, volume mount `./apps/src:/app`, `dotnet watch`)
 - Keycloak: `http://localhost:8081/auth` (`start-dev --import-realm`; admin konsolu `/auth/admin`)
 - Postgres: `localhost:5432` (veritabanları: `portfolio`, `keycloak`)

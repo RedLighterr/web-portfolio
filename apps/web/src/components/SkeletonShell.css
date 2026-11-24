@@ -1,0 +1,86 @@
+/* GEÇİCİ teknik kabuk — tasarım onayından sonra değiştirilecek. Yalnızca theme.css token'ları. */
+
+.skeleton-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  min-height: var(--header-h);
+  padding: var(--space-3) var(--space-6);
+  padding-top: calc(var(--space-3) + var(--safe-top));
+  border-bottom: var(--border-width-thin) solid var(--border-default);
+  background: var(--bg-surface);
+}
+
+.skeleton-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.skeleton-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+.skeleton-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.skeleton-nav a[aria-current='page'] {
+  color: var(--color-primary);
+  font-weight: var(--weight-semibold);
+}
+
+@media (hover: hover) {
+  .skeleton-nav a:hover {
+    color: var(--text-primary);
+  }
+}
+
+.skeleton-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.skeleton-lang {
+  font-size: var(--font-size-sm);
+}
+
+.skeleton-main {
+  width: 100%;
+  max-width: var(--page-max-w);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6) var(--space-16);
+}
+
+.skeleton-main p {
+  max-width: var(--prose-max-w);
+}
+
+@media (max-width: 639px) {
+  .skeleton-header,
+  .skeleton-main {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+}
+
+@media (pointer: coarse) {
+  .skeleton-nav a,
+  .skeleton-lang {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-min);
+  }
+}
